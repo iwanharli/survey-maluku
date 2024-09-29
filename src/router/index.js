@@ -70,6 +70,12 @@ const adminRoutes = (prefix) => [
         component: () => import('@/views/admin/survey/inputSurveyJogja.vue')
     },
     {
+        path: 'input-survey-maluku',
+        name: prefix + '.input-survey-maluku',
+        meta: { auth: false, name: 'inputSurveyMaluku', isBanner: true },
+        component: () => import('@/views/admin/survey/inputSurveyMaluku.vue')
+    },
+    {
         path: 'input-survey-excel',
         name: prefix + '.input-survey-excel',
         meta: { auth: false, name: 'inputSurveyExcel', isBanner: true },
@@ -85,7 +91,7 @@ const adminRoutes = (prefix) => [
     },
 
 
-    // ISU MANAGEMENT 
+    // HASIL ISU
     {
         path: 'responden-issue',
         name: prefix + '.responden-issue',
@@ -100,7 +106,7 @@ const adminRoutes = (prefix) => [
     },
 
 
-    // SURVEY MANAGEMENT
+    // HASIL SURVEY
     {
         path: 'responden-survey-jogja',
         name: prefix + '.responden-survey-jogja',
@@ -112,6 +118,12 @@ const adminRoutes = (prefix) => [
         name: prefix + '.responden-survey-papua',
         meta: { auth: true, name: 'respondenSurveyPapua', isBanner: false },
         component: () => import('@/views/admin/survey/respondenSurveyPapua.vue')
+    },
+    {
+        path: 'responden-survey-maluku',
+        name: prefix + '.responden-survey-maluku',
+        meta: { auth: true, name: 'respondenSurveyMaluku', isBanner: false },
+        component: () => import('@/views/admin/survey/respondenSurveyMaluku.vue')
     },
     {
         path: 'responden-survey-anak',

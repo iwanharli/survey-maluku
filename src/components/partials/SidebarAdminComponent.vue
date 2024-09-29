@@ -10,22 +10,30 @@
       <side-menu title="LAPOR" :static-item="true" miniTitle=""></side-menu>
       <side-menu isTag="router-link" title="SUBMIT ISU" icon="square-plus" :icon-size="15" icon-type="solid" miniTitle="+" :route="{ to: 'admin.input-issue' }"></side-menu>
 
-      <side-menu title="SUBMIT SURVEY" icon="square-plus" :icon-size="15" toggle-id="input" :caret-icon="true" :route="{ popup: 'false', to: 'input' }" @onClick="toggle" :active="currentRoute.includes('input')">
-        <b-collapse tag="ul" class="sub-nav" id="input" accordion="sidebar-menu" :visible="currentRoute.includes('input')">
-          <side-menu isTag="router-link" title="PAPUA" icon="circle" :icon-size="10" icon-type="solid" miniTitle="P" :route="{ to: 'admin.input-survey-papua' }"></side-menu>
-          <side-menu isTag="router-link" title="PAPUA SEHAT" icon="circle" :icon-size="10" icon-type="solid" miniTitle="P" :route="{ to: 'admin.input-survey-papua-sehat' }"></side-menu>
-          <!-- <side-menu isTag="router-link" title="JOGJA" icon="circle" :icon-size="10" icon-type="solid" miniTitle="J" :route="{ to: 'admin.input-survey-jogja' }"></side-menu> -->
-          <!-- <side-menu isTag="router-link" title="BULK SURVEY" icon="circle" :icon-size="10" icon-type="solid" miniTitle="P" :route="{ to: 'admin.input-survey-excel' }"></side-menu> -->
-        </b-collapse>
-      </side-menu>
-
-      <!-- <side-menu title="SUBMIT SURVEY" icon="square-plus" :icon-size="15" toggle-id="inputSurvey" :caret-icon="true" :route="{ popup: 'false', to: 'input' }" @onClick="toggle" :active="currentRoute.includes('input')">
-        <b-collapse tag="ul" class="sub-nav" id="inputSurvey" accordion="sidebar-menu" :visible="currentRoute.includes('input')">
-          <side-menu isTag="router-link" title="NASIONAL" icon="circle" :icon-size="10" icon-type="solid" miniTitle="N" :route="{ to: 'admin.input-survey-nasional' }"></side-menu>
+      <!-- SUBMIT SURVEY -- JOGJA  -->
+      <!-- <side-menu title="SUBMIT SURVEY" icon="square-plus" :icon-size="15" toggle-id="input" :caret-icon="true" :route="{ popup: 'false', to: 'jogja' }" @onClick="toggle" :active="currentRoute.includes('jogja')">
+        <b-collapse tag="ul" class="sub-nav" id="input" accordion="sidebar-menu" :visible="currentRoute.includes('jogja')">
           <side-menu isTag="router-link" title="JOGJA" icon="circle" :icon-size="10" icon-type="solid" miniTitle="J" :route="{ to: 'admin.input-survey-jogja' }"></side-menu>
-          <side-menu isTag="router-link" title="PAPUA" icon="circle" :icon-size="10" icon-type="solid" miniTitle="P" :route="{ to: 'admin.input-survey-papua' }"></side-menu>
+          <side-menu isTag="router-link" title="BULK SURVEY" icon="circle" :icon-size="10" icon-type="solid" miniTitle="B" :route="{ to: 'admin.input-survey-excel' }"></side-menu>
         </b-collapse>
       </side-menu> -->
+
+      <!-- SUBMIT SURVEY -- PAPUA  -->
+      <!-- <side-menu title="SUBMIT SURVEY" icon="square-plus" :icon-size="15" toggle-id="input" :caret-icon="true" :route="{ popup: 'false', to: 'papua' }" @onClick="toggle" :active="currentRoute.includes('papua')">
+        <b-collapse tag="ul" class="sub-nav" id="input" accordion="sidebar-menu" :visible="currentRoute.includes('papua')">
+          <side-menu isTag="router-link" title="PAPUA UMUM" icon="circle" :icon-size="10" icon-type="solid" miniTitle="P" :route="{ to: 'admin.input-survey-papua' }"></side-menu>
+          <side-menu isTag="router-link" title="PAPUA SEHAT" icon="circle" :icon-size="10" icon-type="solid" miniTitle="PS" :route="{ to: 'admin.input-survey-papua-sehat' }"></side-menu>
+          <side-menu isTag="router-link" title="BULK SURVEY" icon="circle" :icon-size="10" icon-type="solid" miniTitle="B" :route="{ to: 'admin.input-survey-excel' }"></side-menu>
+        </b-collapse>
+      </side-menu> -->
+
+      <!-- SUBMIT SURVEY -- MALUKU  -->
+      <side-menu title="SUBMIT SURVEY" icon="square-plus" :icon-size="15" toggle-id="input" :caret-icon="true" :route="{ popup: 'false', to: 'maluku' }" @onClick="toggle" :active="currentRoute.includes('maluku')">
+        <b-collapse tag="ul" class="sub-nav" id="input" accordion="sidebar-menu" :visible="currentRoute.includes('maluku')">
+          <side-menu isTag="router-link" title="MALUKU" icon="circle" :icon-size="10" icon-type="solid" miniTitle="M" :route="{ to: 'admin.input-survey-maluku' }"></side-menu>
+          <side-menu isTag="router-link" title="BULK SURVEY" icon="circle" :icon-size="10" icon-type="solid" miniTitle="B" :route="{ to: 'admin.input-survey-excel' }"></side-menu>
+        </b-collapse>
+      </side-menu>
 
       <router-link :to="{ name: 'admin.input-survey-nasional' }" @click.native="handleSurveyClick">
         <div class="side-menu-item">
@@ -35,7 +43,7 @@
 
       <br />
       <li><hr class="hr-horizontal" /></li>
-      <side-menu title="MANAJEMEN" :static-item="true"></side-menu>
+      <side-menu title="HASIL" :static-item="true"></side-menu>
 
       <!-- ISSUE  -->
       <side-menu title="ISU" icon="file" :icon-size="15" toggle-id="issue" :caret-icon="true" :route="{ popup: 'false', to: 'issue' }" @onClick="toggle" :active="currentRoute.includes('issue')">
@@ -46,14 +54,17 @@
       </side-menu>
 
       <!-- SURVEY  -->
-      <side-menu title="SURVEY" icon="chart-square-bar" :icon-size="15" toggle-id="survey" :caret-icon="true" :route="{ popup: 'false', to: 'survey' }" @onClick="toggle" :active="currentRoute.includes('survey')">
+      <side-menu isTag="router-link" title="SURVEY MALUKU" icon="file" :icon-size="15" icon-type="solid" miniTitle="+" :route="{ to: 'admin.responden-survey-maluku' }"></side-menu>
+
+
+      <!-- <side-menu title="SURVEY" icon="chart-square-bar" :icon-size="15" toggle-id="survey" :caret-icon="true" :route="{ popup: 'false', to: 'survey' }" @onClick="toggle" :active="currentRoute.includes('survey')">
         <b-collapse tag="ul" class="sub-nav" id="survey" accordion="sidebar-menu" :visible="currentRoute.includes('survey')">
-          <!-- <side-menu isTag="router-link" title="RESPONDEN JOGJA" icon="circle" :icon-size="10" icon-type="solid" miniTitle="RS" :route="{ to: 'admin.responden-survey-jogja' }"></side-menu> -->
+          <side-menu isTag="router-link" title="RESPONDEN JOGJA" icon="circle" :icon-size="10" icon-type="solid" miniTitle="RS" :route="{ to: 'admin.responden-survey-jogja' }"></side-menu>
           <side-menu isTag="router-link" title="PAPUA" icon="circle" :icon-size="10" icon-type="solid" miniTitle="R" :route="{ to: 'admin.responden-survey-papua' }"></side-menu>
           <side-menu isTag="router-link" title="DAFTAR ANAK" icon="circle" :icon-size="10" icon-type="solid" miniTitle="DA" :route="{ to: 'admin.responden-survey-anak' }"></side-menu>
-          <!-- <side-menu isTag="router-link" title="DAFTAR SURVEY" icon="circle" :icon-size="10" icon-type="solid" miniTitle="DS" :route="{ to: 'admin.daftar-survey' }"></side-menu> -->
+          <side-menu isTag="router-link" title="DAFTAR SURVEY" icon="circle" :icon-size="10" icon-type="solid" miniTitle="DS" :route="{ to: 'admin.daftar-survey' }"></side-menu>
         </b-collapse>
-      </side-menu>
+      </side-menu> -->
 
       <br />
       <li><hr class="hr-horizontal" /></li>

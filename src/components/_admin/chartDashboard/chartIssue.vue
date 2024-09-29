@@ -31,12 +31,12 @@
                   <h5 class="card-title text-white" style="font-weight: bolder">ISU TERBARU</h5>
                 </div>
               </div>
-              <div class="card-body custom-daftar-isu" style="overflow-y: auto">
-                <div class="mb-2 d-flex align-items-top" v-for="item in this.latestIsu" :key="item.id">
+              <div class="card-body custom-daftar-isu">
+                <div class="mb-2 d-flex align-items-top" v-for="item in latestIsu" :key="item.id">
                   🚀
                   <div class="ms-4">
-                    <!-- <h6 class="mb-1">{{ item.title }}</h6> -->
-                    <h6 style="text-transform: uppercase; text-align: justify">{{ item.description_text }}</h6>
+                    <h6 style="text-transform: capitalize; text-align: left">{{ item.description_text }}</h6>
+                    <small class="text-muted">{{ item.created_at }}</small>
                     <hr />
                   </div>
                 </div>
@@ -108,9 +108,29 @@ import AOS from 'aos'
 export default {
   data() {
     return {
-      latestIsu: [],
+      latestIsu: [
+        { id: 1, description_text: 'Kebijakan Pemulihan Ekonomi Pasca Pandemi', created_at: '2024-09-25' },
+        { id: 2, description_text: 'Isu Lingkungan Hidup: Kebakaran Hutan', created_at: '2024-09-24' },
+        { id: 3, description_text: 'Pendidikan Jarak Jauh di Era Digital', created_at: '2024-09-23' },
+        { id: 4, description_text: 'Penanganan Kasus Kekerasan Terhadap Perempuan', created_at: '2024-09-22' },
+        { id: 5, description_text: 'Investasi Asing di Sektor Infrastruktur', created_at: '2024-09-21' },
+        { id: 6, description_text: 'Pertumbuhan Ekonomi Digital', created_at: '2024-09-20' },
+        { id: 7, description_text: 'Isu Keamanan Siber di Tengah Transformasi Digital', created_at: '2024-09-19' },
+        { id: 8, description_text: 'Konservasi Biodiversitas di Indonesia', created_at: '2024-09-18' },
+        { id: 9, description_text: 'Pengembangan Energi Terbarukan', created_at: '2024-09-17' },
+        { id: 10, description_text: 'Pembangunan Wilayah Terpencil', created_at: '2024-09-16' },
+        { id: 11, description_text: 'Reformasi Sistem Pendidikan di Indonesia', created_at: '2024-09-15' },
+        { id: 12, description_text: 'Krisis Air Bersih di Beberapa Daerah', created_at: '2024-09-14' },
+        { id: 13, description_text: 'Perubahan Iklim dan Dampaknya', created_at: '2024-09-13' },
+        { id: 14, description_text: 'Isu Perumahan Terjangkau', created_at: '2024-09-12' },
+        { id: 15, description_text: 'Peningkatan Kualitas Layanan Kesehatan', created_at: '2024-09-11' },
+        { id: 16, description_text: 'Perlindungan Anak dari Kekerasan', created_at: '2024-09-10' },
+        { id: 17, description_text: 'Kemandirian Energi Nasional', created_at: '2024-09-09' },
+        { id: 18, description_text: 'Isu Kesetaraan Gender di Tempat Kerja', created_at: '2024-09-08' },
+        { id: 19, description_text: 'Kebijakan Pajak dan Pengaruhnya pada Masyarakat', created_at: '2024-09-07' },
+        { id: 20, description_text: 'Pengaruh Teknologi Terhadap Kehidupan Sehari-hari', created_at: '2024-09-06' }
+      ],
       statisticIsu: [],
-
       rotated: false
     }
   },
@@ -252,6 +272,16 @@ export default {
       }
     })
 
+    // DUMMY CHARTDATE ISU
+    const generateDummyData = () => {
+      const invertedIssueNames = ['Issue A', 'Issue B', 'Issue C', 'Issue D', 'Issue E']
+      const invertedIssueValues = [5, 15, 25, 10, 20]
+      chartDateIsu.value.series[0].data = invertedIssueValues
+      chartDateIsu.value.chartOptions.xaxis.categories = invertedIssueNames
+    }
+    generateDummyData()
+    // DUMMY CHARTDATE ISU
+
     onMounted(() => {
       AOS.init({
         disable: function () {
@@ -275,8 +305,8 @@ export default {
       axios
         .get('/api/issue-reports/all?page=1&limit=150', config)
         .then((response) => {
-          this.latestIsu = response.data.data
-          console.log('💚 LATEST ISU')
+          // this.latestIsu = response.data.data
+          console.log('💚 LATEST ISU', response)
         })
         .catch((error) => {
           console.error('💥 LATEST ISSUE Error:', error)
@@ -292,39 +322,55 @@ export default {
           const invertedIssueValues = this.statisticIsu.issue_chart.values.slice().reverse()
           const invertedIssueNames = this.statisticIsu.issue_chart.names.slice().reverse()
 
-          // console.log(this.statisticIsu)
+          console.log(this.statisticIsu)
+
+          // DUMMY
+          this.statisticIsu_Province_Dump = {
+            province_chart: {
+              names: ['Province A', 'Province B', 'Province C', 'Province D', 'Province E'],
+              values: [10, 25, 15, 30, 20]
+            }
+          }
+
+          this.statisticIsu_Category_Dump = {
+            category_chart: {
+              names: ['politik', 'ekonomi', 'keamanan', 'Lain-Lain'],
+              values: [30, 20, 25, 15]
+            }
+          }
+          // DUMMY
 
           this.chartProvince = {
             series: [
               {
-                data: this.statisticIsu.province_chart.values
+                data: this.statisticIsu_Province_Dump.province_chart.values
               }
             ],
             options: {
               xaxis: {
-                categories: this.statisticIsu.province_chart.names
+                categories: this.statisticIsu_Province_Dump.province_chart.names
               }
             }
           }
 
-          this.chartDateIsu = ref({
-            series: [
-              {
-                name: 'Total',
-                data: invertedIssueValues
-              }
-            ],
-            chartOptions: {
-              xaxis: {
-                categories: invertedIssueNames
-              }
-            }
-          })
+          // this.chartDateIsu = ref({
+          //   series: [
+          //     {
+          //       name: 'Total',
+          //       data: invertedIssueValues
+          //     }
+          //   ],
+          //   chartOptions: {
+          //     xaxis: {
+          //       categories: invertedIssueNames
+          //     }
+          //   }
+          // })
 
           this.chartCategory = {
-            series: this.statisticIsu.category_chart.values,
+            series: this.statisticIsu_Category_Dump.category_chart.values,
             chartOptions: {
-              labels: this.statisticIsu.category_chart.names
+              labels: this.statisticIsu_Category_Dump.category_chart.names
             }
           }
 
@@ -345,8 +391,8 @@ export default {
 <style scoped>
 @media only screen and (min-width: 1501px) {
   .custom-daftar-isu {
-    height: 1405px;
-    /* overflow-y: auto; */
+    height: 1320px;
+    overflow-y: auto;
   }
 }
 

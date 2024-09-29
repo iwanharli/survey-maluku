@@ -3,7 +3,9 @@ import axios from "axios";
 // https://vps-be.emacsin.com
 // https://laporisubackend.puas.in/
 
-axios.defaults.baseURL = 'https://vps-be.emacsin.com';
+// GERRUS MALUKU = BE http://206.237.97.18:8080 | FE http://206.237.97.18/
+
+axios.defaults.baseURL = 'http://206.237.97.18:8080';
 axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('token');
 
 // axios.interceptors.response.use(

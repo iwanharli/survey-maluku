@@ -16,24 +16,24 @@
     </div>
 
     <!-- DEMOGRAFI SOSIAL PENDUDUK  -->
-    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+    <!-- <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
       <SocialChart />
-    </div>
+    </div> -->
 
     <!-- PROFIL POTENSI DAERAH  -->
-    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+    <!-- <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
       <ProfilPotensiDaerahChart />
-    </div>
+    </div> -->
 
     <!-- PETA BENCANA  -->
-    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+    <!-- <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
       <PetaBencanaChart />
-    </div>
+    </div> -->
 
     <!-- EIS  -->
-    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+    <!-- <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
       <EisChart />
-    </div>
+    </div> -->
   </div>
 </template>
 

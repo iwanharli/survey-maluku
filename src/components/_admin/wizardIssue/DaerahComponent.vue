@@ -42,7 +42,7 @@
           </b-form-group>
         </b-col>
 
-        <div class="mt-2 pt-4 pb-2" style="border-radius: 20px; background: #3a57e80d">
+        <div class="mt-2 pt-4 pb-2" style="border-radius: 10px; background: #d8d8d80d; border: 1px solid #0000001c;">
           <b-row>
             <b-col xl="6" lg="6" md="6" sm="6">
               <b-form-group label="RT: *">

@@ -4,7 +4,7 @@
       <div class="navbar-brand">
         <!-- <brand-logo></brand-logo> -->
         <img src="@/assets/images/letter-v.png" style="width: 40px; height: 40px" />
-        <h4 class="logo-title" data-setting="app_name">EIS</h4>
+        <h4 class="logo-title" data-setting="app_name">SM</h4>
       </div>
       <div class="sidebar-toggle" @click="toggleSidebar">
         <i class="icon">
