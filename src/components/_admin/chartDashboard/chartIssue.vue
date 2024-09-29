@@ -92,6 +92,16 @@
               </div>
             </div>
           </div>
+
+          <div class="col-xl-12 col-lg-12">
+            <div class="card" data-aos="fade-up" data-aos-delay="500" style="border-radius: 50px">
+              <div class="flex-wrap card-header d-flex justify-content-center align-items-center" style="background: #fffa10; border-radius: 50px">
+                <div class="header-title text-center">
+                  <h4 class="mb-4 card-title text-dark" style="font-weight: bolder; text-transform: capitalize">visualisasi diatas hanyalah preview, tidak mempresentasikan hasil yang sebenarnya</h4>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </b-collapse>
