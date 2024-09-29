@@ -1,0 +1,220 @@
+<template>
+  <!-- SURVEY NASIONAL  -->
+  <div class="card aos-init aos-animate" data-aos="fade-up" data-aos-delay="100">
+    <div class="flex-wrap card-header d-flex justify-content-between bg-primary" block v-b-toggle.accordion-survey-nasional>
+      <div class="header-title">
+        <h4 class="card-title text-white mb-3" style="font-weight: bolder">HASIL SURVEY NASIONAL</h4>
+      </div>
+    </div>
+
+    <b-collapse id="accordion-survey-nasional" role="tabpanel" visible>
+      <div class="card-body">
+        <div class="row">
+          <div v-for="i in 7" :key="i">
+            <div class="col-xl-4" data-aos="fade-up" data-aos-delay="100">
+              <div class="card aos-init aos-animate">
+                <div class="flex-wrap card-header d-flex justify-content-between bg-soft-primary">
+                  <div class="header-title">
+                    <h5 class="card-title text-dark mb-3" style="font-weight: bolder">{{ i }}. {{ surveyChartQ[i].question }}</h5>
+                  </div>
+                </div>
+                <div class="card-body">
+                  <apexchart :height="245" type="bar" :id="`d-main-${i}`" :options="surveyChartQ[i].options" :series="surveyChartQ[i].series" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </b-collapse>
+  </div>
+</template>
+
+<script>
+import { onMounted, ref } from 'vue'
+
+import axios from 'axios'
+import AOS from 'aos'
+
+export default {
+  data() {
+    return {
+      surveyChart: []
+    }
+  },
+
+  setup() {
+    const createSurveyChart = () => ({
+      series: [],
+      options: {
+        xaxis: {
+          labels: {
+            minHeight: 22,
+            maxHeight: 22,
+            show: false,
+            style: {
+              colors: '#8A92A6'
+            }
+          },
+          lines: {
+            show: false // or just here to disable only x axis grids
+          },
+          categories: []
+        },
+        chart: {
+          fontFamily: '"Inter", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"',
+          height: 250,
+          type: 'area',
+          toolbar: {
+            show: true
+          },
+          sparkline: {
+            enabled: false
+          },
+          stacked: true
+        },
+        // colors: ['#079aa2', '#3a57e8', 'red', 'black'],
+        dataLabels: {
+          enabled: false
+        },
+        stroke: {
+          curve: 'smooth',
+          width: 3
+        },
+        yaxis: {
+          show: true,
+          labels: {
+            show: true,
+            minWidth: 19,
+            maxWidth: 19,
+            // style: {
+            //   colors: '#8A92A6'
+            // },
+            offsetX: -5
+          }
+        },
+        legend: {
+          show: true
+        },
+        xaxis: {
+          labels: {
+            minHeight: 22,
+            maxHeight: 22,
+            show: true
+            // style: {
+            //   colors: '#8A92A6'
+            // }
+          },
+          lines: {
+            show: false // or just here to disable only x axis grids
+          },
+          categories: []
+        },
+        grid: {
+          show: true
+        },
+        fill: {
+          type: 'solid',
+          gradient: {
+            shade: 'dark',
+            type: 'vertical',
+            shadeIntensity: 0,
+            gradientToColors: undefined, // optional, if not defined - uses the shades of same color in series
+            inverseColors: true,
+            opacityFrom: 0.4,
+            opacityTo: 0.1,
+            stops: [0, 50, 80]
+            // colors: ['#3a57e8', '#4bc7d2']
+          }
+        },
+        tooltip: {
+          enabled: true
+        }
+      }
+    })
+
+    const surveyChartQ1 = ref(createSurveyChart())
+    const surveyChartQ2 = ref(createSurveyChart())
+    const surveyChartQ3 = ref(createSurveyChart())
+    const surveyChartQ4 = ref(createSurveyChart())
+    const surveyChartQ5 = ref(createSurveyChart())
+    const surveyChartQ6 = ref(createSurveyChart())
+    const surveyChartQ7 = ref(createSurveyChart())
+
+    onMounted(() => {
+      AOS.init({
+        disable: function () {
+          var maxWidth = 996
+          return window.innerWidth < maxWidth
+        },
+        once: true,
+        duration: 800
+      })
+    })
+
+    return { surveyChartQ1, surveyChartQ2, surveyChartQ3, surveyChartQ4, surveyChartQ5, surveyChartQ6, surveyChartQ7 }
+  },
+
+  mounted() {
+    this.fetchNasionalSurveyStatistic()
+  },
+
+  methods: {
+    async fetchNasionalSurveyStatistic() {
+      try {
+        const config = { headers: { Authorization: 'Bearer ' + localStorage.getItem('token') } }
+        const response = await axios.get('/api/visualization/survey_chart/1', config)
+
+        this.NasionalSurveyChart = response.data.data.chart
+        console.log('1', this.NasionalSurveyChart)
+
+        for (let i = 1; i <= 7; i++) {
+          const questionNumber = `question_${i}`
+          const chartNumber = `chart.${questionNumber}`
+
+          console.log('2', questionNumber, chartNumber)
+
+          // capitalizeSeriesNames(this.NasionalSurveyChart[questionNumber])
+
+          this[`surveyChartQ${i}`] = {
+            question: this.NasionalSurveyChart[`question_${i}`].question,
+            series: this.NasionalSurveyChart[`question_${i}`].series,
+            options: {
+              xaxis: {
+                categories: this.NasionalSurveyChart[`question_${i}`].categories
+              }
+            }
+          }
+        }
+
+        console.log('💚 STATISTIC SURVEY')
+      } catch (error) {
+        console.error('💥 STATISTIC SURVEY Error:', error)
+      }
+    }
+  }
+}
+</script>
+
+<style scoped>
+@media only screen and (max-width: 500px) {
+  .custom-mobile {
+    margin-top: 50px;
+  }
+}
+@media only screen and (max-width: 600px) {
+  .custom-mobile {
+    margin-top: 40px;
+  }
+}
+
+@media only screen and (max-width: 700px) {
+  .custom-mobile {
+    margin-top: 50px;
+  }
+
+  .cq5 {
+    display: none !important;
+  }
+}
+</style>
